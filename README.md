@@ -10,7 +10,7 @@ It processes and stores the data in a SQLite database and exposes endpoints to r
 
 ## Live URL
 
-https://your-app-url.up.railway.app
+https://profile-api-production-00aa.up.railway.app/api/profiles
 
 ---
 

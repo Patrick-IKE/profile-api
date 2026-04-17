@@ -39,19 +39,19 @@ init_db()
 def create_profile():
     data = request.get_json()
 
-    if not data:
+    if not data or "name" not in data:
         return jsonify({"status": "error",
-                        "message": "Request body is required"}), 400
+                        "message": "missing name"}), 400
 
     name = data.get("name")
 
-    if name is None or name.strip() == "":
+    if not isinstance(name, str):
         return jsonify({"status": "error",
-                        "message": "Missing or empty name"}), 400
+                        "message": "Invalid type"}), 422
 
-    if not isinstance(name, str) or not name.isalpha():
+    if name.strip() == "":
         return jsonify({"status": "error",
-                        "message": "Invalid name format"}), 422
+                        "message": "empty name"}), 400
     name = name.lower()
 
     conn = get_db_connection()
@@ -145,9 +145,9 @@ def create_profile():
                             "created_at": created_at}}), 201
 
     except Exception as e:
-        print("ERROR:", e)
+        print(e)
         return jsonify({"status": "error",
-                        "message": str(e)}), 500
+                        "message": "server error"}), 500
 
 @app.route("/api/profiles/<profile_id>", methods=["GET"])
 def get_profile(profile_id):
