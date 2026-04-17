@@ -84,7 +84,7 @@ DELETE "/api/profiles/{id}"
 
 Clone the repo:
 
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/Patrick-IKE/profile-api.git
 cd your-repo
 
 Create virtual environment:
